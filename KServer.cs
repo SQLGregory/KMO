@@ -1403,7 +1403,7 @@ FILEPROPERTY(name,''''spaceused'''') spaceused FROM sysfiles''')
 
 SELECT CASE b.type WHEN 0 THEN 'DATA' ELSE b.type_desc END AS filetype
 	, b.name + ' (' + a.name + ')' AS logicalfile
-	, CAST((b.size * 8 / 1024.0) AS DECIMAL(18,2)) AS filesize
+	, CAST((CAST(b.size AS DECIMAL(18,2)) * 8 / 1024.0) AS DECIMAL(18,2)) AS filesize
 	, CAST((d.spaceused / 128.0) AS DECIMAL(15,2)) AS spaceused
 FROM sys.databases a
 	INNER JOIN sys.master_files b ON a.database_id = b.database_id
